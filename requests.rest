@@ -48,7 +48,7 @@ Content-Type: application/json
 
 
 ### Delete a contact - Delete contact by ID (Localhost)
-DELETE http://localhost:3000/contacts/68bab2c5d87ea06beb34838d
+DELETE http://localhost:3000/contacts/68bab05fbff4f64d4a2cca68
 Accept: application/json
 
 
