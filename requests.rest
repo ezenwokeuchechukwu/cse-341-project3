@@ -1,0 +1,96 @@
+# =========================================
+# Localhost Endpoints
+# =========================================
+
+### Get all contacts (Localhost)
+GET http://localhost:3000/contacts
+Accept: application/json
+
+
+
+### Get a contact by ID (Localhost)
+GET http://localhost:3000/contacts/6742824d22c10d709ce17aa8
+Accept: application/json
+
+
+
+### Create a new contact (Localhost)
+POST http://localhost:3000/contacts
+Content-Type: application/json
+
+{
+  "firstName": "Chinedu",
+  "lastName": "Okoro",
+  "email": "chinedu.okoro@example.com",
+  "favoriteColor": "Purple",
+  "birthday": "1988-03-12T00:00:00.000Z"
+}
+
+
+
+### Update a contact (Localhost)
+PUT http://localhost:3000/contacts/{contact-id}
+Content-Type: application/json
+
+{
+  "firstName": "Aisha",
+  "lastName": "Abubakar",
+  "email": "aisha.abubakar@example.com",
+  "favoriteColor": "Yellow",
+  "birthday": "1988-03-12T00:00:00.000Z"
+}
+
+### Delete a contact (Localhost)
+DELETE http://localhost:3000/contacts/{contact-id}
+Accept: application/json
+
+
+
+
+# =========================================
+# Published API Endpoints
+# =========================================
+
+### Get all contacts (Published)
+GET https://cse341-node-9dp6.onrender.com/contacts
+Accept: application/json
+
+
+
+### Get a contact by ID (Published)
+GET https://cse341-node-9dp6.onrender.com/contacts/6742824d22c10d709ce17aa8
+Accept: application/json
+
+
+
+### Create a new contact (Published)
+POST https://cse341-node-9dp6.onrender.com/contacts
+Content-Type: application/json
+
+{
+  "firstName": "Emeka",
+  "lastName": "Ibrahim",
+  "email": "emeka.ibrahim@example.com",
+  "favoriteColor": "Green",
+  "birthday": "1990-05-20T00:00:00.000Z"
+}
+
+
+
+### Update a contact (Published)
+PUT https://cse341-node-9dp6.onrender.com/contacts/{contact-id}
+Content-Type: application/json
+
+{
+  "firstName": "Amina",
+  "lastName": "Abdul",
+  "email": "amina.abdul@example.com",
+  "favoriteColor": "Blue",
+  "birthday": "1992-08-15T00:00:00.000Z"
+}
+
+
+
+### Delete a contact (Published)
+DELETE https://cse341-node-9dp6.onrender.com/contacts/{contact-id}
+Accept: application/json

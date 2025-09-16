@@ -1,0 +1,100 @@
+[{
+  "_id": {
+    "$oid": "68b9bd5633ab395eda5c2ef6"
+  },
+  "firstName": "Chinedu",
+  "lastName": "Okoro-Updated",
+  "email": "chinedu.updated@example.com",
+  "favoriteColor": "Gold",
+  "birthday": "1988-03-12T00:00:00.000Z"
+},
+{
+  "_id": {
+    "$oid": "68b9bd7933ab395eda5c2ef8"
+  },
+  "firstName": "Alan",
+  "lastName": "Turing",
+  "email": "alan.turing@example.com",
+  "favoriteColor": "Green",
+  "birthday": "1912-06-23"
+},
+{
+  "_id": {
+    "$oid": "68bab05fbff4f64d4a2cca68"
+  },
+  "firstName": "Chinedu",
+  "lastName": "Okoro",
+  "email": "chinedu.okoro@example.com",
+  "favoriteColor": "Purple",
+  "birthday": "1988-03-12T00:00:00.000Z"
+},
+{
+  "_id": {
+    "$oid": "68bab068bff4f64d4a2cca69"
+  },
+  "firstName": "Promise",
+  "lastName": "Ezenwoke",
+  "email": "ezenwokeuchechukwu@gmail.com",
+  "favoriteColor": "Blue",
+  "birthday": "1992-07-21T00:00:00.000Z"
+},
+{
+  "_id": {
+    "$oid": "68bab2c5d87ea06beb34838d"
+  },
+  "firstName": "Chinedu",
+  "lastName": "Okoro",
+  "email": "chinedu.okoro@example.com",
+  "favoriteColor": "Purple",
+  "birthday": "1988-03-12T00:00:00.000Z"
+},
+{
+  "_id": {
+    "$oid": "68bac945d6126a598da19e2f"
+  },
+  "firstName": "Chinedu",
+  "lastName": "Okoro",
+  "email": "chinedu.okoro@example.com",
+  "favoriteColor": "Purple",
+  "birthday": "1988-03-12T00:00:00.000Z"
+},
+{
+  "_id": {
+    "$oid": "68bacbe789cbe303cdbf1f8e"
+  },
+  "firstName": "Chinedu",
+  "lastName": "Okoro",
+  "email": "chinedu.okoro@example.com",
+  "favoriteColor": "Purple",
+  "birthday": "1988-03-12T00:00:00.000Z"
+},
+{
+  "_id": {
+    "$oid": "68c02a89b9ee9f413ef88d59"
+  },
+  "firstName": "Chinedu",
+  "lastName": "Okoro",
+  "email": "chinedu.okoro@example.com",
+  "favoriteColor": "Purple",
+  "birthday": "1988-03-12T00:00:00.000Z"
+},
+{
+  "_id": {
+    "$oid": "68c02a96b9ee9f413ef88d5a"
+  },
+  "firstName": "Promise",
+  "lastName": "Ezenwoke",
+  "email": "ezenwokeuchechukwu@gmail.com",
+  "favoriteColor": "Blue",
+  "birthday": "1992-07-21T00:00:00.000Z"
+},
+{
+  "_id": {
+    "$oid": "68c03c43a3b79a79d21e243d"
+  },
+  "firstName": "Promise",
+  "lastName": "Ezenwoke",
+  "email": "ezenwokeuchechukwu@gmail.com",
+  "favoriteColor": "Blue",
+  "birthday": "1992-07-21T00:00:00.000Z"
+}]
