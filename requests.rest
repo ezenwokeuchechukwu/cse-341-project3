@@ -1,5 +1,5 @@
 # =========================================
-# Localhost Endpoints
+# Localhost API Endpoints (http://localhost:3000)
 # =========================================
 
 ### Get all contacts (Localhost)
@@ -7,90 +7,94 @@ GET http://localhost:3000/contacts
 Accept: application/json
 
 
-
-### Get a contact by ID (Localhost)
-GET http://localhost:3000/contacts/6742824d22c10d709ce17aa8
+### Get a contact by ID - Chinedu Okoro Updated (Localhost)
+GET http://localhost:3000/contacts/68b9bd5633ab395eda5c2ef6
 Accept: application/json
 
 
+### Get a contact by ID - Alan Turing (Localhost)
+GET http://localhost:3000/contacts/68b9bd7933ab395eda5c2ef8
+Accept: application/json
 
-### Create a new contact (Localhost)
+
+### Create a new contact - Promise Ezenwoke (Localhost)
 POST http://localhost:3000/contacts
+Content-Type: application/json
+
+{
+  "firstName": "Promise",
+  "lastName": "Ezenwoke",
+  "email": "ezenwokeuchechukwu@gmail.com",
+  "favoriteColor": "Blue",
+  "birthday": "1992-07-21T00:00:00.000Z"
+}
+
+
+### Update a contact - Update Chinedu Okoro favoriteColor to Gold (Localhost)
+PUT http://localhost:3000/contacts/68bab05fbff4f64d4a2cca68
 Content-Type: application/json
 
 {
   "firstName": "Chinedu",
   "lastName": "Okoro",
   "email": "chinedu.okoro@example.com",
-  "favoriteColor": "Purple",
+  "favoriteColor": "Gold",
   "birthday": "1988-03-12T00:00:00.000Z"
 }
 
 
-
-### Update a contact (Localhost)
-PUT http://localhost:3000/contacts/{contact-id}
-Content-Type: application/json
-
-{
-  "firstName": "Aisha",
-  "lastName": "Abubakar",
-  "email": "aisha.abubakar@example.com",
-  "favoriteColor": "Yellow",
-  "birthday": "1988-03-12T00:00:00.000Z"
-}
-
-### Delete a contact (Localhost)
-DELETE http://localhost:3000/contacts/{contact-id}
+### Delete a contact - Delete contact by ID (Localhost)
+DELETE http://localhost:3000/contacts/68bab2c5d87ea06beb34838d
 Accept: application/json
 
 
 
-
 # =========================================
-# Published API Endpoints
+# Published API Endpoints (Render deployment)
+# Base URL: https://cse-341-project3-zouh.onrender.com
 # =========================================
 
 ### Get all contacts (Published)
-GET https://cse341-node-9dp6.onrender.com/contacts
+GET https://cse-341-project3-zouh.onrender.com/contacts
 Accept: application/json
 
 
-
-### Get a contact by ID (Published)
-GET https://cse341-node-9dp6.onrender.com/contacts/6742824d22c10d709ce17aa8
+### Get a contact by ID - Chinedu Okoro Updated (Published)
+GET https://cse-341-project3-zouh.onrender.com/contacts/68b9bd5633ab395eda5c2ef6
 Accept: application/json
 
 
+### Get a contact by ID - Alan Turing (Published)
+GET https://cse-341-project3-zouh.onrender.com/contacts/68b9bd7933ab395eda5c2ef8
+Accept: application/json
 
-### Create a new contact (Published)
-POST https://cse341-node-9dp6.onrender.com/contacts
+
+### Create a new contact - Promise Ezenwoke (Published)
+POST https://cse-341-project3-zouh.onrender.com/contacts
 Content-Type: application/json
 
 {
-  "firstName": "Emeka",
-  "lastName": "Ibrahim",
-  "email": "emeka.ibrahim@example.com",
-  "favoriteColor": "Green",
-  "birthday": "1990-05-20T00:00:00.000Z"
-}
-
-
-
-### Update a contact (Published)
-PUT https://cse341-node-9dp6.onrender.com/contacts/{contact-id}
-Content-Type: application/json
-
-{
-  "firstName": "Amina",
-  "lastName": "Abdul",
-  "email": "amina.abdul@example.com",
+  "firstName": "Promise",
+  "lastName": "Ezenwoke",
+  "email": "ezenwokeuchechukwu@gmail.com",
   "favoriteColor": "Blue",
-  "birthday": "1992-08-15T00:00:00.000Z"
+  "birthday": "1992-07-21T00:00:00.000Z"
 }
 
 
+### Update a contact - Update Chinedu Okoro favoriteColor to Gold (Published)
+PUT https://cse-341-project3-zouh.onrender.com/contacts/68bab05fbff4f64d4a2cca68
+Content-Type: application/json
 
-### Delete a contact (Published)
-DELETE https://cse341-node-9dp6.onrender.com/contacts/{contact-id}
+{
+  "firstName": "Chinedu",
+  "lastName": "Okoro",
+  "email": "chinedu.okoro@example.com",
+  "favoriteColor": "Gold",
+  "birthday": "1988-03-12T00:00:00.000Z"
+}
+
+
+### Delete a contact - Delete contact by ID (Published)
+DELETE https://cse-341-project3-zouh.onrender.com/contacts/68bab2c5d87ea06beb34838d
 Accept: application/json
