@@ -1,84 +1,176 @@
-# Contacts API
+Contacts API
 
-This project is an API for storing and retrieving information about contacts, such as my friends data. The API interacts with a MongoDB database and allows for future frontend integration.
+This project is a RESTful API for managing contacts information, such as my friends’ data. It interacts with a MongoDB database and supports full CRUD operations with data validation and error handling. The API is designed to be easily integrated with future frontend applications.
 
-## Project Overview
+Project Overview
+Week 01 Goals
 
-- **Week 01 Goals:**
-  - Set up the project and database.
-  - Import data into the database.
-  - Complete the GET API routes (`GET` all contacts and `GET` a single contact by ID).
-  - Deploy the app to Render.
+Set up the project and MongoDB database.
 
-## Technologies Used
+Import initial contact data into the database.
 
-- **Backend:** Node.js, Express.js
-- **Database:** MongoDB Atlas
-- **Deployment:** Render
-- **Testing:** REST Client (e.g., Postman or REST Client extension for VSCode)
+Complete the GET API routes (fetch all contacts and fetch a contact by ID).
 
-## Getting Started
+Deploy the app to Render.
 
-### Prerequisites
+Week 03-04 Goals
 
-- **Node.js** and **npm** installed on your local machine.
-- A **MongoDB Atlas** account.
-- A **Render** account for deployment.
-- **Git** installed for version control.
+Implement full CRUD operations (Create, Retrieve, Update, Delete).
 
-### Installation
+Add data validation and error handling.
 
-1. **Clone the Repository**
+Prepare API documentation.
 
-   ```bash
-   git clone:git@github.com:ezenwokeuchechukwu/cse-341-project3.git
-   cd cse341-project3
-   ```
+Integrate OAuth for authentication (planned for Week 04).
 
-2. **Install Dependencies**
+Publish API with environment variables secured.
 
-   ```bash
-   npm install
-   ```
+Technologies Used
 
-## API Reference
+Backend: Node.js, Express.js
 
-### Base URL
+Database: MongoDB Atlas
 
-- **URL:** `https://cse-341-project3-zouh.onrender.com`
+Deployment: Render
 
-### Get All Contacts
+Testing: REST Client extension for VSCode, Postman, or cURL
 
-- **Endpoint:** `/contacts`
-- **Method:** `GET`
-- **Description:** Retrieves all contacts from the database.
-- **Response:** Array of contact objects.
+Getting Started
+Prerequisites
 
-### Get Contact by ID
+Node.js and npm installed locally
 
-- **Endpoint:** `/contacts/{id}`
-- **Method:** `GET`
-- **URL Parameter:** `id` (string) - The unique identifier of the contact.
-- **Description:** Retrieves a single contact by its ID.
-- **Response:** Contact object.
+MongoDB Atlas account
 
-## Testing
+Render account for deployment
 
-- Use the `requests.rest` file with the REST Client extension in VSCode.
-- Alternatively, use a tool like Postman or cURL to test the endpoints.
+Git for version control
 
-## Video Demonstration
+Installation
 
-A video demonstrating the functionality of this project is available on YouTube:
+Clone the repository:
 
-- [Project Demo Video 1]()
-- [Project Demo Video 2]()
+git clone git@github.com:ezenwokeuchechukwu/cse-341-project3.git
+cd cse-341-project3
 
-## License
 
-This project is for my educational purposes.
+Install dependencies:
 
-## Contact
+npm install
 
-- **Author:** Ezenwoke Uchechukwu Promise
-- **Email:** uezenwoke@byupathway.edu
+
+Create a .env file with your MongoDB URI and any other environment variables:
+
+MONGODB_URI=your_mongodb_connection_string
+
+
+Start the server locally:
+
+npm start
+
+API Reference
+Base URL
+
+Local (development): http://localhost:3000
+
+Published (Render): https://cse-341-project3-zouh.onrender.com
+
+Contact Object Schema (7 fields)
+{
+  "firstName": "string",
+  "lastName": "string",
+  "email": "string",
+  "favoriteColor": "string",
+  "birthday": "ISO 8601 date string",
+  "phone": "string",
+  "address": "string"
+}
+
+Endpoints
+Get All Contacts
+
+Endpoint: /contacts
+
+Method: GET
+
+Description: Retrieves all contacts from the database.
+
+Response: Array of contact objects.
+
+Get Contact by ID
+
+Endpoint: /contacts/{id}
+
+Method: GET
+
+URL Parameter: id (string) - Contact’s unique MongoDB ObjectId.
+
+Description: Retrieves a single contact by its ID.
+
+Response: Contact object.
+
+Create a New Contact
+
+Endpoint: /contacts
+
+Method: POST
+
+Content-Type: application/json
+
+Request Body: Full contact object (7 fields required).
+
+Description: Creates a new contact in the database.
+
+Response: Confirmation message and the created contact.
+
+Update a Contact
+
+Endpoint: /contacts/{id}
+
+Method: PUT
+
+URL Parameter: id (string) - Contact’s ObjectId.
+
+Content-Type: application/json
+
+Request Body: Full contact object (7 fields required).
+
+Description: Updates the contact with the specified ID.
+
+Response: Confirmation message and the updated contact.
+
+Delete a Contact
+
+Endpoint: /contacts/{id}
+
+Method: DELETE
+
+URL Parameter: id (string) - Contact’s ObjectId.
+
+Description: Deletes the contact with the specified ID.
+
+Response: Confirmation message.
+
+Testing
+
+Use the provided requests.rest file with the REST Client extension in VSCode.
+
+Alternatively, use Postman or cURL to test endpoints.
+
+Video Demonstration
+
+Watch the demo videos showcasing the API functionality:
+
+(Project Demo Video 1)
+
+(Project Demo Video 2)
+
+License
+
+This project is for educational purposes only.
+
+Contact
+
+Author: Ezenwoke Uchechukwu Promise
+
+Email: uezenwoke@byupathway.edu
