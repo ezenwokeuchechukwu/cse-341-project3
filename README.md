@@ -45,7 +45,7 @@ This project is an API for storing and retrieving information about contacts, su
 
 ### Base URL
 
-- **URL:** `https://contacts-api-123.onrender.com`
+- **URL:** `https://cse-341-project3-zouh.onrender.com`
 
 ### Get All Contacts
 
