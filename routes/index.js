@@ -21,7 +21,7 @@ const swaggerDefinition = {
 	},
 	servers: [
 		{
-			url: "https://cse341-node-9dp6.onrender.com",
+			url: "https://cse-341-project3-zouh.onrender.com",
 		},
 	],
 };
@@ -40,7 +40,7 @@ app.use(express.json());
 // Configure CORS to allow localhost
 app.use(
 	cors({
-		origin: "https://cse341-node-9dp6.onrender.com",
+		origin: "https://cse-341-project3-zouh.onrender.com",
 	})
 );
 

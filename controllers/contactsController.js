@@ -24,23 +24,28 @@ const getContactById = asyncHandler(async (req, res) => {
 // Create a new contact
 const createContact = asyncHandler(async (req, res) => {
 	const db = getDatabase();
-	const { firstName, lastName, email, favoriteColor, birthday } = req.body;
+	const { firstName, lastName, email, favoriteColor, birthday, phone, address } = req.body;
 
 	// Validate that all fields are provided
-	if (!firstName || !lastName || !email || !favoriteColor || !birthday) {
+	if (!firstName || !lastName || !email || !favoriteColor || !birthday || !phone || !address) {
 		return res.status(400).json({ error: "All fields are required" });
 	}
 
-	const newContact = { firstName, lastName, email, favoriteColor, birthday };
+	const newContact = {
+		firstName,
+		lastName,
+		email,
+		favoriteColor,
+		birthday,
+		phone,
+		address,
+	};
 
-	try {
-		const result = await db.collection("contacts").insertOne(newContact);
-		res
-			.status(201)
-			.json({ message: "Contact created successfully", id: result.insertedId });
-	} catch (error) {
-		res.status(500).json({ error: "Failed to create contact" });
-	}
+	const result = await db.collection("contacts").insertOne(newContact);
+	res.status(201).json({
+		message: "Contact created successfully",
+		contact: { _id: result.insertedId, ...newContact },
+	});
 });
 
 // Update a contact
@@ -48,10 +53,10 @@ const updateContact = asyncHandler(async (req, res) => {
 	const db = getDatabase();
 	const { id } = req.params;
 	const objectId = validateObjectId(id);
-	const { firstName, lastName, email, favoriteColor, birthday } = req.body;
+	const { firstName, lastName, email, favoriteColor, birthday, phone, address } = req.body;
 
 	// Validate that all fields are provided
-	if (!firstName || !lastName || !email || !favoriteColor || !birthday) {
+	if (!firstName || !lastName || !email || !favoriteColor || !birthday || !phone || !address) {
 		return res.status(400).json({ error: "All fields are required" });
 	}
 
@@ -61,6 +66,8 @@ const updateContact = asyncHandler(async (req, res) => {
 		email,
 		favoriteColor,
 		birthday,
+		phone,
+		address,
 	};
 
 	const result = await db
@@ -71,7 +78,10 @@ const updateContact = asyncHandler(async (req, res) => {
 		return res.status(404).json({ error: "Contact not found" });
 	}
 
-	res.status(200).json({ message: "Contact updated successfully" });
+	res.status(200).json({
+		message: "Contact updated successfully",
+		contact: { _id: objectId, ...updatedContact },
+	});
 });
 
 // Delete a contact
