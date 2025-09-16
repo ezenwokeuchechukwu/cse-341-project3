@@ -33,22 +33,22 @@ Content-Type: application/json
 
 
 ### Update a contact - Update Chinedu Okoro favoriteColor to Gold (Localhost)
-PUT http://localhost:3000/contacts/68bab05fbff4f64d4a2cca68
+PUT http://localhost:3000/contacts/68b9bd7933ab395eda5c2ef8
 Content-Type: application/json
 
 {
-  "firstName": "Chinedu",
-  "lastName": "Okoro",
-  "email": "chinedu.okoro@example.com",
-  "favoriteColor": "Gold",
-  "birthday": "1988-03-12T00:00:00.000Z",
-  "phone": "555-234-5678",
-  "address": "456 Elm St, Lagos, Nigeria"
+  "firstName": "Promise",
+  "lastName": "Ezenwoke",
+  "email": "ezenwokeuchechukwu@gmail.com",
+  "favoriteColor": "Blue",
+  "birthday": "1992-07-21T00:00:00.000Z",
+  "phone": "555-345-6789",
+  "address": "789 Oak St, Abuja, Nigeria"
 }
 
 
 ### Delete a contact - Delete contact by ID (Localhost)
-DELETE http://localhost:3000/contacts/68bab05fbff4f64d4a2cca68
+DELETE http://localhost:3000/contacts/68b9bd7933ab395eda5c2ef8
 Accept: application/json
 
 
