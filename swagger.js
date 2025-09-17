@@ -1,5 +1,6 @@
 const swaggerJSDoc = require("swagger-jsdoc");
 const fs = require("fs");
+const path = require("path");
 
 // Swagger definition
 const swaggerDefinition = {
@@ -25,11 +26,13 @@ const options = {
 // Initialize swagger-jsdoc
 const swaggerSpec = swaggerJSDoc(options);
 
-// Write swagger specification to swagger.json
-fs.writeFileSync(
-	"./swagger.json",
-	JSON.stringify(swaggerSpec, null, 2),
-	"utf-8"
-);
+// Output file path (configurable)
+const outputPath = path.resolve(__dirname, "swagger.json");
 
-console.log("swagger.json has been generated!");
+try {
+	fs.writeFileSync(outputPath, JSON.stringify(swaggerSpec, null, 2), "utf-8");
+	console.log(`Swagger JSON has been generated successfully at: ${outputPath}`);
+} catch (error) {
+	console.error("Failed to write swagger.json:", error);
+	process.exit(1);
+}

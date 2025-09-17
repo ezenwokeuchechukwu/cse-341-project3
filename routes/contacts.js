@@ -21,6 +21,8 @@ const contactsController = require("../controllers/contactsController");
  *         - email
  *         - favoriteColor
  *         - birthday
+ *         - phone
+ *         - address
  *       properties:
  *         id:
  *           type: string
@@ -41,12 +43,21 @@ const contactsController = require("../controllers/contactsController");
  *           type: string
  *           format: date
  *           description: The birthday of the contact.
+ *         phone:
+ *           type: string
+ *           description: Phone number of the contact.
+ *         address:
+ *           type: string
+ *           description: Address of the contact.
  *       example:
+ *         id: 60f7f9b2e1d3c0b1c8a9e123
  *         firstName: Abigail
  *         lastName: Johnson
  *         email: abi.jo@example.com
  *         favoriteColor: Blue
  *         birthday: 1990-01-01
+ *         phone: 123-456-7890
+ *         address: 123 Main St, Springfield
  *     ContactInput:
  *       type: object
  *       required:
@@ -55,6 +66,8 @@ const contactsController = require("../controllers/contactsController");
  *         - email
  *         - favoriteColor
  *         - birthday
+ *         - phone
+ *         - address
  *       properties:
  *         firstName:
  *           type: string
@@ -72,12 +85,20 @@ const contactsController = require("../controllers/contactsController");
  *           type: string
  *           format: date
  *           description: The birthday of the contact.
+ *         phone:
+ *           type: string
+ *           description: Phone number of the contact.
+ *         address:
+ *           type: string
+ *           description: Address of the contact.
  *       example:
- *         firstName: ""
- *         lastName: ""
- *         email: ""
- *         favoriteColor: ""
- *         birthday: ""
+ *         firstName: Abigail
+ *         lastName: Johnson
+ *         email: abi.jo@example.com
+ *         favoriteColor: Blue
+ *         birthday: 1990-01-01
+ *         phone: 123-456-7890
+ *         address: 123 Main St, Springfield
  *     ContactResponse:
  *       allOf:
  *         - $ref: '#/components/schemas/ContactInput'
@@ -93,6 +114,8 @@ const contactsController = require("../controllers/contactsController");
  *         email: abi.jo@example.com
  *         favoriteColor: Blue
  *         birthday: 1990-01-01
+ *         phone: 123-456-7890
+ *         address: 123 Main St, Springfield
  */
 
 /**
@@ -159,6 +182,8 @@ router.get("/:id", contactsController.getContactById);
  *               $ref: '#/components/schemas/ContactResponse'
  *       400:
  *         description: Invalid input
+ *       409:
+ *         description: Conflict - Email already exists
  */
 router.post("/", contactsController.createContact);
 
@@ -192,6 +217,8 @@ router.post("/", contactsController.createContact);
  *         description: Invalid input
  *       404:
  *         description: Contact not found
+ *       409:
+ *         description: Conflict - Email already exists
  */
 router.put("/:id", contactsController.updateContact);
 

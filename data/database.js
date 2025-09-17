@@ -5,31 +5,39 @@ dotenv.config();
 
 let database = null;
 
-// Initialize the database connection
 const initializeDatabase = async () => {
-	if (database) {
-		console.log("Database is already initialized!");
-		return;
-	}
-	try {
-		const client = await MongoClient.connect(process.env.MONGODB_URI);
-		database = client.db();
-		console.log("Database initialized");
-	} catch (error) {
-		console.error("Failed to connect to database:", error);
-		throw error;
-	}
+  if (database) {
+    console.log("Database is already initialized!");
+    return;
+  }
+
+  const uri = process.env.MONGODB_URI;
+  const dbName = process.env.DB_NAME || "contactsDB";
+
+  if (!uri) {
+    throw new Error("MONGODB_URI is not defined in .env");
+  }
+
+  try {
+    // Removed useNewUrlParser and useUnifiedTopology options
+    const client = await MongoClient.connect(uri);
+
+    database = client.db(dbName);
+    console.log(`Connected to MongoDB → Database: ${dbName}`);
+  } catch (error) {
+    console.error("Failed to connect to database:", error.message);
+    throw error;
+  }
 };
 
-// Get the database instance
 const getDatabase = () => {
-	if (!database) {
-		throw new Error("Database not initialized");
-	}
-	return database;
+  if (!database) {
+    throw new Error("Database not initialized. Call initializeDatabase() first.");
+  }
+  return database;
 };
 
 module.exports = {
-	initializeDatabase,
-	getDatabase,
+  initializeDatabase,
+  getDatabase,
 };
