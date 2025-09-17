@@ -8,12 +8,12 @@ Accept: application/json
 
 
 ### Get a contact by ID - Chinedu Okoro Updated (Localhost)
-GET http://localhost:3000/contacts/68b9bd5633ab395eda5c2ef6
+GET http://localhost:3000/contacts/68cb31cec4c41602cbc244e0
 Accept: application/json
 
 
 ### Get a contact by ID - Alan Turing (Localhost)
-GET http://localhost:3000/contacts/68b9bd7933ab395eda5c2ef8
+GET http://localhost:3000/contacts/68cb31f3c4c41602cbc244e1
 Accept: application/json
 
 
@@ -24,7 +24,7 @@ Content-Type: application/json
 {
   "firstName": "Promise",
   "lastName": "Ezenwoke",
-  "email": "ezenwokeuchechukwu@gmail.com",
+  "email": "ezenwokeuchechukw32u@gmail.com",
   "favoriteColor": "Blue",
   "birthday": "1992-07-21T00:00:00.000Z",
   "phone": "555-345-6789",
@@ -32,23 +32,23 @@ Content-Type: application/json
 }
 
 
-### Update a contact - Update Chinedu Okoro favoriteColor to Gold (Localhost)
-PUT http://localhost:3000/contacts/68b9bd7933ab395eda5c2ef8
+### Update a contact - Update Chinedu Okoro Updated favoriteColor to Gold (Localhost)
+PUT http://localhost:3000/contacts/68cb31cec4c41602cbc244e0
 Content-Type: application/json
 
 {
   "firstName": "Chinedu",
-  "lastName": "Okoro",
-  "email": "chinedu.okoro@example.com",
+  "lastName": "Okoro-Updated",
+  "email": "chinedu.updated@example.com",
   "favoriteColor": "Gold",
   "birthday": "1988-03-12T00:00:00.000Z",
-  "phone": "555-234-5678",
-  "address": "456 Elm St, Lagos, Nigeria"
+  "phone": "555-123-4567",
+  "address": "123 Main St, Lagos, Nigeria"
 }
 
 
 ### Delete a contact - Delete contact by ID (Localhost)
-DELETE http://localhost:3000/contacts/68b9bd7933ab395eda5c2ef8
+DELETE http://localhost:3000/contacts/68cb31cec4c41602cbc244e0
 Accept: application/json
 
 
@@ -64,12 +64,12 @@ Accept: application/json
 
 
 ### Get a contact by ID - Chinedu Okoro Updated (Published)
-GET https://cse-341-project3-zouh.onrender.com/contacts/68b9bd5633ab395eda5c2ef6
+GET https://cse-341-project3-zouh.onrender.com/contacts/68cb31cec4c41602cbc244e0
 Accept: application/json
 
 
 ### Get a contact by ID - Alan Turing (Published)
-GET https://cse-341-project3-zouh.onrender.com/contacts/68b9bd7933ab395eda5c2ef8
+GET https://cse-341-project3-zouh.onrender.com/contacts/68cb31f3c4c41602cbc244e1
 Accept: application/json
 
 
@@ -80,7 +80,7 @@ Content-Type: application/json
 {
   "firstName": "Promise",
   "lastName": "Ezenwoke",
-  "email": "ezenwokeuchechukwu@gmail.com",
+  "email": "ezenwokeuchechukw32u@gmail.com",
   "favoriteColor": "Blue",
   "birthday": "1992-07-21T00:00:00.000Z",
   "phone": "555-345-6789",
@@ -89,20 +89,20 @@ Content-Type: application/json
 
 
 ### Update a contact - Update Chinedu Okoro favoriteColor to Gold (Published)
-PUT https://cse-341-project3-zouh.onrender.com/contacts/68bab05fbff4f64d4a2cca68
+PUT https://cse-341-project3-zouh.onrender.com/contacts/68cb31cec4c41602cbc244e0
 Content-Type: application/json
 
 {
   "firstName": "Chinedu",
-  "lastName": "Okoro",
-  "email": "chinedu.okoro@example.com",
+  "lastName": "Okoro-Updated",
+  "email": "chinedu.updated@example.com",
   "favoriteColor": "Gold",
   "birthday": "1988-03-12T00:00:00.000Z",
-  "phone": "555-234-5678",
-  "address": "456 Elm St, Lagos, Nigeria"
+  "phone": "555-123-4567",
+  "address": "123 Main St, Lagos, Nigeria"
 }
 
 
 ### Delete a contact - Delete contact by ID (Published)
-DELETE https://cse-341-project3-zouh.onrender.com/contacts/68bab2c5d87ea06beb34838d
+DELETE https://cse-341-project3-zouh.onrender.com/contacts/68cb31cec4c41602cbc244e0
 Accept: application/json

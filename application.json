@@ -1,6 +1,16 @@
 [
   {
-    "_id": { "$oid": "68b9bd5633ab395eda5c2ef6" },
+    "_id": "68cb29551b569fbf5735abbf",
+    "firstName": "Promise",
+    "lastName": "Ezenwoke",
+    "email": "ezenwokeuchechukw32u@gmail.com",
+    "favoriteColor": "Blue",
+    "birthday": "1992-07-21T00:00:00.000Z",
+    "phone": "555-345-6789",
+    "address": "789 Oak St, Abuja, Nigeria"
+  },
+  {
+    "_id": "68cb31cec4c41602cbc244e0",
     "firstName": "Chinedu",
     "lastName": "Okoro-Updated",
     "email": "chinedu.updated@example.com",
@@ -10,7 +20,7 @@
     "address": "123 Main St, Lagos, Nigeria"
   },
   {
-    "_id": { "$oid": "68b9bd7933ab395eda5c2ef8" },
+    "_id": "68cb31f3c4c41602cbc244e1",
     "firstName": "Alan",
     "lastName": "Turing",
     "email": "alan.turing@example.com",
@@ -20,7 +30,7 @@
     "address": "Computing Road, Cambridge, UK"
   },
   {
-    "_id": { "$oid": "68bab05fbff4f64d4a2cca68" },
+    "_id": "68cb3217c4c41602cbc244e2",
     "firstName": "Chinedu",
     "lastName": "Okoro",
     "email": "chinedu.okoro@example.com",
@@ -30,73 +40,23 @@
     "address": "456 Elm St, Lagos, Nigeria"
   },
   {
-    "_id": { "$oid": "68bab068bff4f64d4a2cca69" },
-    "firstName": "Promise",
-    "lastName": "Ezenwoke",
-    "email": "ezenwokeuchechukwu@gmail.com",
-    "favoriteColor": "Blue",
-    "birthday": "1992-07-21T00:00:00.000Z",
-    "phone": "555-345-6789",
-    "address": "789 Oak St, Abuja, Nigeria"
-  },
-  {
-    "_id": { "$oid": "68bab2c5d87ea06beb34838d" },
+    "_id": "68cb326cc4c41602cbc244e3",
     "firstName": "Chinedu",
-    "lastName": "Okoro",
-    "email": "chinedu.okoro@example.com",
+    "lastName": "james",
+    "email": "chinedu.james@example.com",
     "favoriteColor": "Purple",
     "birthday": "1988-03-12T00:00:00.000Z",
     "phone": "555-234-5678",
     "address": "456 Elm St, Lagos, Nigeria"
   },
   {
-    "_id": { "$oid": "68bac945d6126a598da19e2f" },
-    "firstName": "Chinedu",
-    "lastName": "Okoro",
-    "email": "chinedu.okoro@example.com",
+    "_id": "68cb3297c4c41602cbc244e4",
+    "firstName": "John",
+    "lastName": "james",
+    "email": "John.james@example.com",
     "favoriteColor": "Purple",
     "birthday": "1988-03-12T00:00:00.000Z",
-    "phone": "555-234-5678",
+    "phone": "555-635-5678",
     "address": "456 Elm St, Lagos, Nigeria"
-  },
-  {
-    "_id": { "$oid": "68bacbe789cbe303cdbf1f8e" },
-    "firstName": "Chinedu",
-    "lastName": "Okoro",
-    "email": "chinedu.okoro@example.com",
-    "favoriteColor": "Purple",
-    "birthday": "1988-03-12T00:00:00.000Z",
-    "phone": "555-234-5678",
-    "address": "456 Elm St, Lagos, Nigeria"
-  },
-  {
-    "_id": { "$oid": "68c02a89b9ee9f413ef88d59" },
-    "firstName": "Chinedu",
-    "lastName": "Okoro",
-    "email": "chinedu.okoro@example.com",
-    "favoriteColor": "Purple",
-    "birthday": "1988-03-12T00:00:00.000Z",
-    "phone": "555-234-5678",
-    "address": "456 Elm St, Lagos, Nigeria"
-  },
-  {
-    "_id": { "$oid": "68c02a96b9ee9f413ef88d5a" },
-    "firstName": "Promise",
-    "lastName": "Ezenwoke",
-    "email": "ezenwokeuchechukwu@gmail.com",
-    "favoriteColor": "Blue",
-    "birthday": "1992-07-21T00:00:00.000Z",
-    "phone": "555-345-6789",
-    "address": "789 Oak St, Abuja, Nigeria"
-  },
-  {
-    "_id": { "$oid": "68c03c43a3b79a79d21e243d" },
-    "firstName": "Promise",
-    "lastName": "Ezenwoke",
-    "email": "ezenwokeuchechukwu@gmail.com",
-    "favoriteColor": "Blue",
-    "birthday": "1992-07-21T00:00:00.000Z",
-    "phone": "555-345-6789",
-    "address": "789 Oak St, Abuja, Nigeria"
   }
 ]
