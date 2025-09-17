@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com:ezenwokeuchechukwu/cse-341-project3.git"
+    "url": "git+ssh://git@github.com/ezenwokeuchechukwu/cse-341-project3.git"
   },
   "author": "Ezenwoke uchechukwu Promise",
   "license": "ISC",
@@ -19,10 +19,12 @@
   "homepage": "https://github.com/ezenwokeuchechukwu/cse-341-project3#readme",
   "dependencies": {
     "cors": "^2.8.5",
-    "dotenv": "^16.4.5",
+    "dotenv": "^16.6.1",
     "express": "^4.21.2",
     "mongodb": "^6.11.0",
+    "mongoose": "^8.18.1",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1"
-  }
+  },
+  "keywords": []
 }
