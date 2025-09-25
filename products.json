@@ -1,0 +1,52 @@
+[
+  {
+    "_id": "64fa2b2c1234567890abcd01",
+    "name": "Laptop",
+    "description": "15-inch laptop with 16GB RAM and 512GB SSD",
+    "price": 1200.00,
+    "category": "Electronics",
+    "stock": 25,
+    "brand": "TechBrand",
+    "createdAt": "2025-09-24T10:00:00Z"
+  },
+  {
+    "_id": "64fa2b2c1234567890abcd02",
+    "name": "Smartphone",
+    "description": "Latest Android phone with 5G support",
+    "price": 800.00,
+    "category": "Electronics",
+    "stock": 40,
+    "brand": "PhoneMax",
+    "createdAt": "2025-09-24T10:05:00Z"
+  },
+  {
+    "_id": "64fa2b2c1234567890abcd03",
+    "name": "Headphones",
+    "description": "Wireless noise-cancelling headphones",
+    "price": 200.00,
+    "category": "Accessories",
+    "stock": 60,
+    "brand": "SoundPro",
+    "createdAt": "2025-09-24T10:10:00Z"
+  },
+  {
+    "_id": "64fa2b2c1234567890abcd04",
+    "name": "Smartwatch",
+    "description": "Water-resistant smartwatch with health tracking",
+    "price": 300.00,
+    "category": "Wearables",
+    "stock": 35,
+    "brand": "Watchly",
+    "createdAt": "2025-09-24T10:15:00Z"
+  },
+  {
+    "_id": "64fa2b2c1234567890abcd05",
+    "name": "Tablet",
+    "description": "10-inch tablet with stylus support",
+    "price": 450.00,
+    "category": "Electronics",
+    "stock": 20,
+    "brand": "TabWorld",
+    "createdAt": "2025-09-24T10:20:00Z"
+  }
+]

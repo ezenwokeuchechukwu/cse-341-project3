@@ -1,33 +1,32 @@
-// routes/contacts.js
 const express = require("express");
 const router = express.Router();
-const contactsController = require("../controllers/contactsController");
+const productsController = require("../controllers/productsController");
 
 /**
  * @swagger
  * tags:
- *   name: Contacts
- *   description: Contact management API
+ *   name: Products
+ *   description: Product management API
  */
 
 /**
  * @swagger
- * /api/contacts:
+ * /api/products:
  *   get:
- *     summary: Get all contacts
- *     tags: [Contacts]
+ *     summary: Get all products
+ *     tags: [Products]
  *     responses:
  *       200:
- *         description: List of all contacts
+ *         description: List of all products
  */
-router.get("/", contactsController.getAllContacts);
+router.get("/", productsController.getAllProducts);
 
 /**
  * @swagger
- * /api/contacts/{id}:
+ * /api/products/{id}:
  *   get:
- *     summary: Get contact by ID
- *     tags: [Contacts]
+ *     summary: Get product by ID
+ *     tags: [Products]
  *     parameters:
  *       - in: path
  *         name: id
@@ -36,16 +35,16 @@ router.get("/", contactsController.getAllContacts);
  *           type: string
  *     responses:
  *       200:
- *         description: Contact data
+ *         description: Product data
  */
-router.get("/:id", contactsController.getContactById);
+router.get("/:id", productsController.getProductById);
 
 /**
  * @swagger
- * /api/contacts:
+ * /api/products:
  *   post:
- *     summary: Create a new contact
- *     tags: [Contacts]
+ *     summary: Create a new product
+ *     tags: [Products]
  *     requestBody:
  *       required: true
  *       content:
@@ -55,22 +54,22 @@ router.get("/:id", contactsController.getContactById);
  *             properties:
  *               name:
  *                 type: string
- *               email:
- *                 type: string
- *               phone:
+ *               price:
+ *                 type: number
+ *               description:
  *                 type: string
  *     responses:
  *       201:
- *         description: Contact created
+ *         description: Product created
  */
-router.post("/", contactsController.createContact);
+router.post("/", productsController.createProduct);
 
 /**
  * @swagger
- * /api/contacts/{id}:
+ * /api/products/{id}:
  *   put:
- *     summary: Update a contact by ID
- *     tags: [Contacts]
+ *     summary: Update a product by ID
+ *     tags: [Products]
  *     parameters:
  *       - in: path
  *         name: id
@@ -86,22 +85,22 @@ router.post("/", contactsController.createContact);
  *             properties:
  *               name:
  *                 type: string
- *               email:
- *                 type: string
- *               phone:
+ *               price:
+ *                 type: number
+ *               description:
  *                 type: string
  *     responses:
  *       200:
- *         description: Contact updated
+ *         description: Product updated
  */
-router.put("/:id", contactsController.updateContact);
+router.put("/:id", productsController.updateProduct);
 
 /**
  * @swagger
- * /api/contacts/{id}:
+ * /api/products/{id}:
  *   delete:
- *     summary: Delete a contact by ID
- *     tags: [Contacts]
+ *     summary: Delete a product by ID
+ *     tags: [Products]
  *     parameters:
  *       - in: path
  *         name: id
@@ -110,8 +109,8 @@ router.put("/:id", contactsController.updateContact);
  *           type: string
  *     responses:
  *       200:
- *         description: Contact deleted
+ *         description: Product deleted
  */
-router.delete("/:id", contactsController.deleteContact);
+router.delete("/:id", productsController.deleteProduct);
 
 module.exports = router;

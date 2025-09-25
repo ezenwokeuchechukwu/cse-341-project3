@@ -1,33 +1,32 @@
-// routes/contacts.js
 const express = require("express");
 const router = express.Router();
-const contactsController = require("../controllers/contactsController");
+const usersController = require("../controllers/usersController");
 
 /**
  * @swagger
  * tags:
- *   name: Contacts
- *   description: Contact management API
+ *   name: Users
+ *   description: User management API
  */
 
 /**
  * @swagger
- * /api/contacts:
+ * /api/users:
  *   get:
- *     summary: Get all contacts
- *     tags: [Contacts]
+ *     summary: Get all users
+ *     tags: [Users]
  *     responses:
  *       200:
- *         description: List of all contacts
+ *         description: List of all users
  */
-router.get("/", contactsController.getAllContacts);
+router.get("/", usersController.getAllUsers);
 
 /**
  * @swagger
- * /api/contacts/{id}:
+ * /api/users/{id}:
  *   get:
- *     summary: Get contact by ID
- *     tags: [Contacts]
+ *     summary: Get user by ID
+ *     tags: [Users]
  *     parameters:
  *       - in: path
  *         name: id
@@ -36,16 +35,16 @@ router.get("/", contactsController.getAllContacts);
  *           type: string
  *     responses:
  *       200:
- *         description: Contact data
+ *         description: User data
  */
-router.get("/:id", contactsController.getContactById);
+router.get("/:id", usersController.getUserById);
 
 /**
  * @swagger
- * /api/contacts:
+ * /api/users:
  *   post:
- *     summary: Create a new contact
- *     tags: [Contacts]
+ *     summary: Create a new user
+ *     tags: [Users]
  *     requestBody:
  *       required: true
  *       content:
@@ -57,20 +56,20 @@ router.get("/:id", contactsController.getContactById);
  *                 type: string
  *               email:
  *                 type: string
- *               phone:
+ *               password:
  *                 type: string
  *     responses:
  *       201:
- *         description: Contact created
+ *         description: User created
  */
-router.post("/", contactsController.createContact);
+router.post("/", usersController.createUser);
 
 /**
  * @swagger
- * /api/contacts/{id}:
+ * /api/users/{id}:
  *   put:
- *     summary: Update a contact by ID
- *     tags: [Contacts]
+ *     summary: Update a user by ID
+ *     tags: [Users]
  *     parameters:
  *       - in: path
  *         name: id
@@ -88,20 +87,18 @@ router.post("/", contactsController.createContact);
  *                 type: string
  *               email:
  *                 type: string
- *               phone:
- *                 type: string
  *     responses:
  *       200:
- *         description: Contact updated
+ *         description: User updated
  */
-router.put("/:id", contactsController.updateContact);
+router.put("/:id", usersController.updateUser);
 
 /**
  * @swagger
- * /api/contacts/{id}:
+ * /api/users/{id}:
  *   delete:
- *     summary: Delete a contact by ID
- *     tags: [Contacts]
+ *     summary: Delete a user by ID
+ *     tags: [Users]
  *     parameters:
  *       - in: path
  *         name: id
@@ -110,8 +107,8 @@ router.put("/:id", contactsController.updateContact);
  *           type: string
  *     responses:
  *       200:
- *         description: Contact deleted
+ *         description: User deleted
  */
-router.delete("/:id", contactsController.deleteContact);
+router.delete("/:id", usersController.deleteUser);
 
 module.exports = router;
