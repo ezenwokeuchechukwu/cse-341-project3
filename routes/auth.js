@@ -1,114 +1,41 @@
+// routes/auth.js
 const express = require("express");
 const router = express.Router();
-const usersController = require("../controllers/usersController");
+const passport = require("passport");
 
-/**
- * @swagger
- * tags:
- *   name: Users
- *   description: User management API
- */
+// Redirect to GitHub for login
+router.get("/github", passport.authenticate("github"));
 
-/**
- * @swagger
- * /api/users:
- *   get:
- *     summary: Get all users
- *     tags: [Users]
- *     responses:
- *       200:
- *         description: List of all users
- */
-router.get("/", usersController.getAllUsers);
+// GitHub callback URL
+router.get(
+  "/github/callback",
+  passport.authenticate("github", {
+    failureRedirect: "/login",        // Redirect if login fails
+    successRedirect: "/auth/profile", // Redirect after successful login
+  })
+);
 
-/**
- * @swagger
- * /api/users/{id}:
- *   get:
- *     summary: Get user by ID
- *     tags: [Users]
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
- *     responses:
- *       200:
- *         description: User data
- */
-router.get("/:id", usersController.getUserById);
+// Logout route
+router.get("/logout", (req, res, next) => {
+  req.logout((err) => {
+    if (err) return next(err);   // Handle errors
+    res.redirect("/");            // Redirect to homepage (or any route) after logout
+  });
+});
 
-/**
- * @swagger
- * /api/users:
- *   post:
- *     summary: Create a new user
- *     tags: [Users]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               name:
- *                 type: string
- *               email:
- *                 type: string
- *               password:
- *                 type: string
- *     responses:
- *       201:
- *         description: User created
- */
-router.post("/", usersController.createUser);
 
-/**
- * @swagger
- * /api/users/{id}:
- *   put:
- *     summary: Update a user by ID
- *     tags: [Users]
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               name:
- *                 type: string
- *               email:
- *                 type: string
- *     responses:
- *       200:
- *         description: User updated
- */
-router.put("/:id", usersController.updateUser);
-
-/**
- * @swagger
- * /api/users/{id}:
- *   delete:
- *     summary: Delete a user by ID
- *     tags: [Users]
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
- *     responses:
- *       200:
- *         description: User deleted
- */
-router.delete("/:id", usersController.deleteUser);
+// Protected profile route
+router.get("/profile", (req, res) => {
+  if (!req.user) {
+    return res.status(401).send({ error: "Not logged in" });
+  }
+  // Return logged-in user's info
+  res.send({
+    id: req.user._id,
+    name: req.user.name,
+    email: req.user.email,
+    githubId: req.user.githubId,
+  });
+});
 
 module.exports = router;

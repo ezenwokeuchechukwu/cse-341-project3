@@ -1,44 +1,52 @@
+// server.js
 require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const passport = require("passport");
-const session = require("cookie-session");
-const githubstrategy = require("passport-github").Strategy;
-const swaggerSetup = require("./swagger");
-require("./config/passport"); // initialize passport strategies
+const session = require("express-session");
 
+// Initialize passport strategies
+require("./config/passport");
+
+// Import routes
+const authRoutes = require("./routes/auth");
+const usersRoutes = require("./routes/users");
 const contactsRoutes = require("./routes/contacts");
 const productsRoutes = require("./routes/products");
-const authRoutes = require("./routes/auth");
+
+// Swagger setup
+const swaggerSetup = require("./swagger");
 
 const app = express();
-
 
 // Middleware
 app.use(cors());
 app.use(express.json());
 
-// cookie session for passport (required to handle OAuth redirect states)
+// Express-session (works with passport)
 app.use(
   session({
-    name: "session",
-    keys: [process.env.SESSION_SECRET || "secretkey"],
-    maxAge: 24 * 60 * 60 * 1000, // 1 day
+    secret: process.env.SESSION_SECRET || "secretkey",
+    resave: false,
+    saveUninitialized: false,
+    cookie: { maxAge: 24 * 60 * 60 * 1000 }, // 1 day
   })
 );
+
 app.use(passport.initialize());
 app.use(passport.session());
 
 // Routes
-app.use("/auth", authRoutes);
-app.use("/api/contacts", contactsRoutes);
-app.use("/api/products", productsRoutes);
+app.use("/auth", authRoutes);              // GitHub login/logout
+app.use("/api/users", usersRoutes);        // Users CRUD API
+app.use("/api/contacts", contactsRoutes);  // Contacts API
+app.use("/api/products", productsRoutes);  // Products API
 
-// Swagger Docs
+// Swagger documentation
 swaggerSetup(app);
 
-// Error handler (basic)
+// Basic error handler
 app.use((err, req, res, next) => {
   console.error(err);
   res.status(500).json({ error: "Internal Server Error" });
