@@ -1,32 +1,44 @@
 // routes/contacts.js
 const express = require("express");
 const router = express.Router();
-const contactsController = require("../controllers/contactsController");
+const Contact = require("../models/Contact");
+const authenticateToken = require("../middleware/auth");
 
 /**
  * @swagger
  * tags:
  *   name: Contacts
- *   description: Contact management API
+ *   description: Contact management API (Protected with JWT)
  */
 
 /**
  * @swagger
  * /api/contacts:
  *   get:
- *     summary: Get all contacts
+ *     summary: Get all contacts (Protected)
+ *     security:
+ *       - bearerAuth: []
  *     tags: [Contacts]
  *     responses:
  *       200:
  *         description: List of all contacts
  */
-router.get("/", contactsController.getAllContacts);
+router.get("/", authenticateToken, async (req, res) => {
+  try {
+    const contacts = await Contact.find();
+    res.json(contacts);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch contacts" });
+  }
+});
 
 /**
  * @swagger
  * /api/contacts/{id}:
  *   get:
- *     summary: Get contact by ID
+ *     summary: Get contact by ID (Protected)
+ *     security:
+ *       - bearerAuth: []
  *     tags: [Contacts]
  *     parameters:
  *       - in: path
@@ -38,13 +50,22 @@ router.get("/", contactsController.getAllContacts);
  *       200:
  *         description: Contact data
  */
-router.get("/:id", contactsController.getContactById);
+router.get("/:id", authenticateToken, async (req, res) => {
+  try {
+    const contact = await Contact.findById(req.params.id);
+    res.json(contact);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch contact" });
+  }
+});
 
 /**
  * @swagger
  * /api/contacts:
  *   post:
- *     summary: Create a new contact
+ *     summary: Create a new contact (Protected)
+ *     security:
+ *       - bearerAuth: []
  *     tags: [Contacts]
  *     requestBody:
  *       required: true
@@ -63,13 +84,24 @@ router.get("/:id", contactsController.getContactById);
  *       201:
  *         description: Contact created
  */
-router.post("/", contactsController.createContact);
+router.post("/", authenticateToken, async (req, res) => {
+  try {
+    const { name, email, phone } = req.body;
+    const newContact = new Contact({ name, email, phone });
+    await newContact.save();
+    res.status(201).json(newContact);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to create contact" });
+  }
+});
 
 /**
  * @swagger
  * /api/contacts/{id}:
  *   put:
- *     summary: Update a contact by ID
+ *     summary: Update a contact by ID (Protected)
+ *     security:
+ *       - bearerAuth: []
  *     tags: [Contacts]
  *     parameters:
  *       - in: path
@@ -94,13 +126,24 @@ router.post("/", contactsController.createContact);
  *       200:
  *         description: Contact updated
  */
-router.put("/:id", contactsController.updateContact);
+router.put("/:id", authenticateToken, async (req, res) => {
+  try {
+    const updated = await Contact.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+    res.json(updated);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to update contact" });
+  }
+});
 
 /**
  * @swagger
  * /api/contacts/{id}:
  *   delete:
- *     summary: Delete a contact by ID
+ *     summary: Delete a contact by ID (Protected)
+ *     security:
+ *       - bearerAuth: []
  *     tags: [Contacts]
  *     parameters:
  *       - in: path
@@ -112,6 +155,13 @@ router.put("/:id", contactsController.updateContact);
  *       200:
  *         description: Contact deleted
  */
-router.delete("/:id", contactsController.deleteContact);
+router.delete("/:id", authenticateToken, async (req, res) => {
+  try {
+    await Contact.findByIdAndDelete(req.params.id);
+    res.json({ message: "Contact deleted" });
+  } catch (err) {
+    res.status(500).json({ error: "Failed to delete contact" });
+  }
+});
 
 module.exports = router;

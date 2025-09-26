@@ -1,31 +1,44 @@
+// routes/products.js
 const express = require("express");
 const router = express.Router();
-const productsController = require("../controllers/productsController");
+const Product = require("../models/Product");
+const authenticateToken = require("../middleware/auth");
 
 /**
  * @swagger
  * tags:
  *   name: Products
- *   description: Product management API
+ *   description: Product management API (Protected with JWT)
  */
 
 /**
  * @swagger
  * /api/products:
  *   get:
- *     summary: Get all products
+ *     summary: Get all products (Protected)
+ *     security:
+ *       - bearerAuth: []
  *     tags: [Products]
  *     responses:
  *       200:
  *         description: List of all products
  */
-router.get("/", productsController.getAllProducts);
+router.get("/", authenticateToken, async (req, res) => {
+  try {
+    const products = await Product.find();
+    res.json(products);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch products" });
+  }
+});
 
 /**
  * @swagger
  * /api/products/{id}:
  *   get:
- *     summary: Get product by ID
+ *     summary: Get product by ID (Protected)
+ *     security:
+ *       - bearerAuth: []
  *     tags: [Products]
  *     parameters:
  *       - in: path
@@ -37,13 +50,22 @@ router.get("/", productsController.getAllProducts);
  *       200:
  *         description: Product data
  */
-router.get("/:id", productsController.getProductById);
+router.get("/:id", authenticateToken, async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
+    res.json(product);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch product" });
+  }
+});
 
 /**
  * @swagger
  * /api/products:
  *   post:
- *     summary: Create a new product
+ *     summary: Create a new product (Protected)
+ *     security:
+ *       - bearerAuth: []
  *     tags: [Products]
  *     requestBody:
  *       required: true
@@ -62,13 +84,24 @@ router.get("/:id", productsController.getProductById);
  *       201:
  *         description: Product created
  */
-router.post("/", productsController.createProduct);
+router.post("/", authenticateToken, async (req, res) => {
+  try {
+    const { name, price, description } = req.body;
+    const newProduct = new Product({ name, price, description });
+    await newProduct.save();
+    res.status(201).json(newProduct);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to create product" });
+  }
+});
 
 /**
  * @swagger
  * /api/products/{id}:
  *   put:
- *     summary: Update a product by ID
+ *     summary: Update a product by ID (Protected)
+ *     security:
+ *       - bearerAuth: []
  *     tags: [Products]
  *     parameters:
  *       - in: path
@@ -93,13 +126,24 @@ router.post("/", productsController.createProduct);
  *       200:
  *         description: Product updated
  */
-router.put("/:id", productsController.updateProduct);
+router.put("/:id", authenticateToken, async (req, res) => {
+  try {
+    const updated = await Product.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+    res.json(updated);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to update product" });
+  }
+});
 
 /**
  * @swagger
  * /api/products/{id}:
  *   delete:
- *     summary: Delete a product by ID
+ *     summary: Delete a product by ID (Protected)
+ *     security:
+ *       - bearerAuth: []
  *     tags: [Products]
  *     parameters:
  *       - in: path
@@ -111,6 +155,13 @@ router.put("/:id", productsController.updateProduct);
  *       200:
  *         description: Product deleted
  */
-router.delete("/:id", productsController.deleteProduct);
+router.delete("/:id", authenticateToken, async (req, res) => {
+  try {
+    await Product.findByIdAndDelete(req.params.id);
+    res.json({ message: "Product deleted" });
+  } catch (err) {
+    res.status(500).json({ error: "Failed to delete product" });
+  }
+});
 
 module.exports = router;
