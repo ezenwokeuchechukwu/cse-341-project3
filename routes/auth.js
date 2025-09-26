@@ -1,41 +1,92 @@
-// routes/auth.js
 const express = require("express");
 const router = express.Router();
-const passport = require("passport");
+const jwt = require("jsonwebtoken");
 
-// Redirect to GitHub for login
-router.get("/github", passport.authenticate("github"));
+// =====================
+// Swagger Docs
+// =====================
 
-// GitHub callback URL
-router.get(
-  "/github/callback",
-  passport.authenticate("github", {
-    failureRedirect: "/login",        // Redirect if login fails
-    successRedirect: "/auth/profile", // Redirect after successful login
-  })
-);
-
-// Logout route
-router.get("/logout", (req, res, next) => {
-  req.logout((err) => {
-    if (err) return next(err);   // Handle errors
-    res.redirect("/");            // Redirect to homepage (or any route) after logout
-  });
+/**
+ * @swagger
+ * /auth/register:
+ *   post:
+ *     summary: Register a new user
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - username
+ *               - email
+ *               - password
+ *             properties:
+ *               username:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: User registered successfully
+ *       400:
+ *         description: User already exists
+ */
+router.post("/register", async (req, res) => {
+  // registration logic here
 });
 
+/**
+ * @swagger
+ * /auth/login:
+ *   post:
+ *     summary: Login and receive a JWT token
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - email
+ *               - password
+ *             properties:
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: JWT token returned
+ *       401:
+ *         description: Invalid credentials
+ */
+router.post("/login", async (req, res) => {
+  // login logic here
+});
 
-// Protected profile route
-router.get("/profile", (req, res) => {
-  if (!req.user) {
-    return res.status(401).send({ error: "Not logged in" });
-  }
-  // Return logged-in user's info
-  res.send({
-    id: req.user._id,
-    name: req.user.name,
-    email: req.user.email,
-    githubId: req.user.githubId,
-  });
+/**
+ * @swagger
+ * /auth/protected:
+ *   get:
+ *     summary: Access a protected route
+ *     tags: [Auth]
+ *     security:
+ *       - bearerAuth: []   # requires JWT in Authorization header
+ *     responses:
+ *       200:
+ *         description: Protected data returned
+ *       401:
+ *         description: No token provided
+ *       403:
+ *         description: Invalid token
+ */
+router.get("/protected", (req, res) => {
+  // protected route logic here
 });
 
 module.exports = router;
