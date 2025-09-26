@@ -11,7 +11,7 @@ require("./config/passport");
 
 // Import routes
 const authRoutes = require("./routes/auth");
-const usersRoutes = require("./routes/users");
+// const usersRoutes = require("./routes/users"); // removed
 const contactsRoutes = require("./routes/contacts");
 const productsRoutes = require("./routes/products");
 
@@ -38,8 +38,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Routes
-app.use("/auth", authRoutes);              // GitHub login/logout
-app.use("/api/users", usersRoutes);        // Users CRUD API
+app.use("/auth", authRoutes);              // GitHub + JWT login/logout
 app.use("/api/contacts", contactsRoutes);  // Contacts API
 app.use("/api/products", productsRoutes);  // Products API
 

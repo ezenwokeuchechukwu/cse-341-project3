@@ -20,10 +20,12 @@ const options = {
     },
     security: [{ bearerAuth: [] }]
   },
-  apis: ["./routes/*.js"] // add JSDoc comments in route files or controllers
+  // only include the routes you want visible
+  apis: ["./routes/auth.js", "./routes/contacts.js", "./routes/products.js"]
 };
 
 const specs = swaggerJsDoc(options);
+
 module.exports = (app) => {
   app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 };
