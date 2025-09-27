@@ -1,33 +1,75 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Contacts API",
+    "title": "Contacts & Products API",
     "version": "1.0.0",
-    "description": "API for managing contacts"
+    "description": "API for managing contacts and products. Uses GitHub OAuth to generate JWTs for authorization."
   },
   "servers": [
     {
       "url": "http://localhost:3000"
     }
   ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "Contact": {
+        "type": "object",
+        "required": ["firstName", "lastName", "email", "favoriteColor", "birthday", "phone", "address"],
+        "properties": {
+          "id": { "type": "string", "description": "The auto-generated id of the contact." },
+          "firstName": { "type": "string" },
+          "lastName": { "type": "string" },
+          "email": { "type": "string" },
+          "favoriteColor": { "type": "string" },
+          "birthday": { "type": "string", "format": "date" },
+          "phone": { "type": "string" },
+          "address": { "type": "string" }
+        }
+      },
+      "Product": {
+        "type": "object",
+        "required": ["name", "price", "description"],
+        "properties": {
+          "id": { "type": "string", "description": "Auto-generated product id" },
+          "name": { "type": "string", "example": "Smartwatch" },
+          "price": { "type": "number", "example": 299.99 },
+          "description": { "type": "string", "example": "Water-resistant smartwatch with health tracking" }
+        }
+      },
+      "ProductInput": {
+        "type": "object",
+        "required": ["name", "price", "description"],
+        "properties": {
+          "name": { "type": "string" },
+          "price": { "type": "number" },
+          "description": { "type": "string" }
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
   "paths": {
     "/contacts": {
       "get": {
         "summary": "Get all contacts",
-        "tags": [
-          "Contacts"
-        ],
+        "tags": ["Contacts"],
         "responses": {
           "200": {
             "description": "List of contacts",
             "content": {
               "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Contact"
-                  }
-                }
+                "schema": { "type": "array", "items": { "$ref": "#/components/schemas/Contact" } }
               }
             }
           }
@@ -35,290 +77,132 @@
       },
       "post": {
         "summary": "Create a new contact",
-        "tags": [
-          "Contacts"
-        ],
+        "tags": ["Contacts"],
+        "security": [{ "bearerAuth": [] }],
         "requestBody": {
           "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ContactInput"
-              }
-            }
-          }
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Contact" } } }
         },
         "responses": {
-          "201": {
-            "description": "Contact created",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContactResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid input"
-          },
-          "409": {
-            "description": "Conflict - Email already exists"
-          }
+          "201": { "description": "Contact created" },
+          "400": { "description": "Invalid input" }
         }
       }
     },
     "/contacts/{id}": {
       "get": {
         "summary": "Get contact by ID",
-        "tags": [
-          "Contacts"
-        ],
+        "tags": ["Contacts"],
         "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "description": "Contact ID",
-            "schema": {
-              "type": "string"
-            }
-          }
+          { "in": "path", "name": "id", "required": true, "schema": { "type": "string" } }
         ],
         "responses": {
-          "200": {
-            "description": "Contact data",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Contact"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Contact not found"
-          }
+          "200": { "description": "Contact data" },
+          "404": { "description": "Not found" }
         }
       },
       "put": {
-        "summary": "Update an existing contact",
-        "tags": [
-          "Contacts"
-        ],
+        "summary": "Update a contact",
+        "tags": ["Contacts"],
+        "security": [{ "bearerAuth": [] }],
         "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "description": "Contact ID",
-            "schema": {
-              "type": "string"
-            }
-          }
+          { "in": "path", "name": "id", "required": true, "schema": { "type": "string" } }
         ],
         "requestBody": {
           "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ContactInput"
-              }
-            }
-          }
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Contact" } } }
         },
         "responses": {
-          "200": {
-            "description": "Contact updated",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContactResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid input"
-          },
-          "404": {
-            "description": "Contact not found"
-          },
-          "409": {
-            "description": "Conflict - Email already exists"
-          }
+          "200": { "description": "Updated" },
+          "404": { "description": "Not found" }
         }
       },
       "delete": {
         "summary": "Delete a contact",
-        "tags": [
-          "Contacts"
-        ],
+        "tags": ["Contacts"],
+        "security": [{ "bearerAuth": [] }],
         "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "description": "Contact ID",
-            "schema": {
-              "type": "string"
-            }
-          }
+          { "in": "path", "name": "id", "required": true, "schema": { "type": "string" } }
         ],
         "responses": {
-          "200": {
-            "description": "Contact deleted"
-          },
-          "404": {
-            "description": "Contact not found"
-          }
+          "200": { "description": "Deleted" },
+          "404": { "description": "Not found" }
         }
       }
-    }
-  },
-  "components": {
-    "schemas": {
-      "Contact": {
-        "type": "object",
-        "required": [
-          "firstName",
-          "lastName",
-          "email",
-          "favoriteColor",
-          "birthday",
-          "phone",
-          "address"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "The auto-generated id of the contact."
-          },
-          "firstName": {
-            "type": "string",
-            "description": "The first name of the contact."
-          },
-          "lastName": {
-            "type": "string",
-            "description": "The last name of the contact."
-          },
-          "email": {
-            "type": "string",
-            "description": "The email address of the contact."
-          },
-          "favoriteColor": {
-            "type": "string",
-            "description": "The favorite color of the contact."
-          },
-          "birthday": {
-            "type": "string",
-            "format": "date",
-            "description": "The birthday of the contact."
-          },
-          "phone": {
-            "type": "string",
-            "description": "Phone number of the contact."
-          },
-          "address": {
-            "type": "string",
-            "description": "Address of the contact."
-          }
-        },
-        "example": {
-          "id": "60f7f9b2e1d3c0b1c8a9e123",
-          "firstName": "Abigail",
-          "lastName": "Johnson",
-          "email": "abi.jo@example.com",
-          "favoriteColor": "Blue",
-          "birthday": "1990-01-01",
-          "phone": "123-456-7890",
-          "address": "123 Main St, Springfield"
-        }
-      },
-      "ContactInput": {
-        "type": "object",
-        "required": [
-          "firstName",
-          "lastName",
-          "email",
-          "favoriteColor",
-          "birthday",
-          "phone",
-          "address"
-        ],
-        "properties": {
-          "firstName": {
-            "type": "string",
-            "description": "The first name of the contact."
-          },
-          "lastName": {
-            "type": "string",
-            "description": "The last name of the contact."
-          },
-          "email": {
-            "type": "string",
-            "description": "The email address of the contact."
-          },
-          "favoriteColor": {
-            "type": "string",
-            "description": "The favorite color of the contact."
-          },
-          "birthday": {
-            "type": "string",
-            "format": "date",
-            "description": "The birthday of the contact."
-          },
-          "phone": {
-            "type": "string",
-            "description": "Phone number of the contact."
-          },
-          "address": {
-            "type": "string",
-            "description": "Address of the contact."
-          }
-        },
-        "example": {
-          "firstName": "Abigail",
-          "lastName": "Johnson",
-          "email": "abi.jo@example.com",
-          "favoriteColor": "Blue",
-          "birthday": "1990-01-01",
-          "phone": "123-456-7890",
-          "address": "123 Main St, Springfield"
-        }
-      },
-      "ContactResponse": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/ContactInput"
-          },
-          {
-            "type": "object",
-            "properties": {
-              "id": {
-                "type": "string",
-                "description": "The auto-generated id of the contact."
+    },
+    "/products": {
+      "get": {
+        "summary": "Get all products",
+        "tags": ["Products"],
+        "responses": {
+          "200": {
+            "description": "List of products",
+            "content": {
+              "application/json": {
+                "schema": { "type": "array", "items": { "$ref": "#/components/schemas/Product" } }
               }
             }
           }
+        }
+      },
+      "post": {
+        "summary": "Create a new product",
+        "tags": ["Products"],
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ProductInput" } } }
+        },
+        "responses": {
+          "201": { "description": "Product created" },
+          "400": { "description": "Invalid input" }
+        }
+      }
+    },
+    "/products/{id}": {
+      "get": {
+        "summary": "Get product by ID",
+        "tags": ["Products"],
+        "parameters": [
+          { "in": "path", "name": "id", "required": true, "schema": { "type": "string" } }
         ],
-        "example": {
-          "id": "60f7f9b2e1d3c0b1c8a9e123",
-          "firstName": "Abigail",
-          "lastName": "Johnson",
-          "email": "abi.jo@example.com",
-          "favoriteColor": "Blue",
-          "birthday": "1990-01-01",
-          "phone": "123-456-7890",
-          "address": "123 Main St, Springfield"
+        "responses": {
+          "200": { "description": "Product data" },
+          "404": { "description": "Not found" }
+        }
+      },
+      "put": {
+        "summary": "Update a product",
+        "tags": ["Products"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          { "in": "path", "name": "id", "required": true, "schema": { "type": "string" } }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ProductInput" } } }
+        },
+        "responses": {
+          "200": { "description": "Updated" },
+          "404": { "description": "Not found" }
+        }
+      },
+      "delete": {
+        "summary": "Delete a product",
+        "tags": ["Products"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          { "in": "path", "name": "id", "required": true, "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": { "description": "Deleted" },
+          "404": { "description": "Not found" }
         }
       }
     }
   },
   "tags": [
-    {
-      "name": "Contacts",
-      "description": "API for managing contacts"
-    }
+    { "name": "Contacts", "description": "API for managing contacts" },
+    { "name": "Products", "description": "API for managing products" }
   ]
 }

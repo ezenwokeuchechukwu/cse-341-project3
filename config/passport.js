@@ -1,7 +1,19 @@
-// config/passport.js
 const passport = require("passport");
-const GitHubStrategy = require("passport-github").Strategy;
-const User = require("../models/User");
+const GitHubStrategy = require("passport-github2").Strategy;
+const User = require("../models/User"); // adjust path to your user model
+
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+passport.deserializeUser(async (id, done) => {
+  try {
+    const user = await User.findById(id); // or db lookup
+    done(null, user);
+  } catch (err) {
+    done(err);
+  }
+});
 
 passport.use(
   new GitHubStrategy(
@@ -12,38 +24,22 @@ passport.use(
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
-        // Find if user already exists
+        // check if user already exists
         let user = await User.findOne({ githubId: profile.id });
-
         if (!user) {
-          // Create new user
-          user = new User({
+          // create new user
+          user = await User.create({
             githubId: profile.id,
-            name: profile.displayName || profile.username,
-            email: profile.emails && profile.emails[0]?.value, // may be undefined
+            username: profile.username,
+            email: profile.emails?.[0]?.value || null,
           });
-          await user.save();
         }
-
-        done(null, user);
+        return done(null, user);
       } catch (err) {
-        done(err, null);
+        return done(err, null);
       }
     }
   )
 );
 
-// Serialize user to session
-passport.serializeUser((user, done) => {
-  done(null, user._id);
-});
-
-// Deserialize user from session
-passport.deserializeUser(async (id, done) => {
-  try {
-    const user = await User.findById(id);
-    done(null, user);
-  } catch (err) {
-    done(err, null);
-  }
-});
+module.exports = passport;
