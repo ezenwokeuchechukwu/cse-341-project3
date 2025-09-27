@@ -73,7 +73,7 @@ Base URL
 
 Local (development): http://localhost:3000
 
-Published (Render): https://cse-341-project3-zouh.onrender.com
+Published (Render): https://cse-341-project3-fxw0.onrender.com
 
 Contact Object Schema (7 fields)
 {
