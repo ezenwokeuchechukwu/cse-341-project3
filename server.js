@@ -8,6 +8,7 @@ const session = require("express-session");
 const passport = require("./config/passport");
 const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
+const cors = require("cors");
 
 // Swagger
 const swaggerUi = require("swagger-ui-express");
@@ -34,12 +35,25 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// ✅ CORS setup (allow frontend + cookies)
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL || "http://localhost:3000", // frontend origin
+    credentials: true, // allow cookies/sessions across domains
+  })
+);
+
 // Sessions (needed for Passport OAuth)
 app.use(
   session({
-    secret: process.env.JWT_SECRET,
+    secret: process.env.JWT_SECRET || "default_secret",
     resave: false,
     saveUninitialized: false,
+    cookie: {
+      secure: process.env.NODE_ENV === "production", // only https in prod
+      httpOnly: true,
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    },
   })
 );
 
