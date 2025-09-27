@@ -35,29 +35,32 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// ✅ CORS setup (allow frontend + cookies)
+// ✅ CORS setup (allow frontend + GitHub redirects)
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || "http://localhost:3000", // frontend origin
+    origin: [
+      process.env.CLIENT_URL || "http://localhost:3000",
+      "https://your-app-name.onrender.com", // replace with your Render app URL
+    ],
     credentials: true, // allow cookies/sessions across domains
   })
 );
 
-// Sessions (needed for Passport OAuth)
+// ✅ Sessions (needed for Passport OAuth)
 app.use(
   session({
     secret: process.env.JWT_SECRET || "default_secret",
     resave: false,
     saveUninitialized: false,
     cookie: {
-      secure: process.env.NODE_ENV === "production", // only https in prod
+      secure: process.env.NODE_ENV === "production", // ✅ HTTPS only in prod
       httpOnly: true,
-      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax", // ✅ allow GitHub OAuth
     },
   })
 );
 
-// Passport setup
+// ✅ Passport setup
 app.use(passport.initialize());
 app.use(passport.session());
 
