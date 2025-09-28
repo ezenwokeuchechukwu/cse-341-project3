@@ -36,11 +36,18 @@ router.get("/:id", authenticateToken, async (req, res) => {
 // Create a new contact
 router.post("/", authenticateToken, async (req, res) => {
   try {
-    const { name, email, phone } = req.body;
-    const newContact = new Contact({ name, email, phone });
+    const { firstName, lastName, email, phone } = req.body;
 
-    // Save and handle validation/duplicate errors
+    // Combine firstName and lastName into the required 'name' field
+    const name = `${firstName || ""} ${lastName || ""}`.trim();
+
+    // Validate required fields
+    if (!name) return res.status(400).json({ error: "Name is required" });
+    if (!email) return res.status(400).json({ error: "Email is required" });
+
+    const newContact = new Contact({ name, email, phone });
     await newContact.save();
+
     res.status(201).json(newContact);
   } catch (err) {
     console.error("Failed to create contact:", err);
