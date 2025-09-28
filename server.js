@@ -40,7 +40,7 @@ app.use(
   cors({
     origin: [
       process.env.CLIENT_URL || "http://localhost:3000",
-      "https://your-app-name.onrender.com", // replace with your Render app URL
+      "https://cse-341-project3-fxw0.onrender.com", // replace with your Render app URL
     ],
     credentials: true, // allow cookies/sessions across domains
   })
@@ -49,7 +49,7 @@ app.use(
 // ✅ Sessions (needed for Passport OAuth)
 app.use(
   session({
-    secret: process.env.JWT_SECRET || "default_secret",
+    secret: process.env.SESSION_SECRET || "default_secret",
     resave: false,
     saveUninitialized: false,
     cookie: {
